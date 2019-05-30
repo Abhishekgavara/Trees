@@ -1,0 +1,163 @@
+import java.util.*;
+class Binarysearchtree{
+    static Node root;
+    
+
+class Node{
+    int data;
+    Node left,right;
+    public Node(int data){
+        this.data=data;
+    }
+}
+
+void insert(int x){
+    Node p=new Node(x);
+    if(root==null)
+    root=p;
+    else{
+    Node r=root;
+    Node q=root;
+    while(q!=null){
+        r=q;
+        if(x>q.data)
+        q=q.right;
+        else
+        q=q.left;
+        
+        
+    }
+    if(x>r.data)
+    r.right=p;
+    else
+    r.left=p;
+}
+
+}
+ void levelorder(Node root){
+                                Queue<Node> q=new LinkedList<Node>();
+
+                if(root==null)
+                return;
+                
+                q.add(root);
+            
+               while(!q.isEmpty()){
+                   Node temp=q.poll();
+                   System.out.println(temp.data);
+                   
+                   if(temp.left!=null)
+                   q.add(temp.left);
+                   
+                   if(temp.right!=null)
+                   q.add(temp.right);
+                       
+                   }
+               }
+
+          boolean search(int x){
+              
+              if(root==null)
+              return false;
+              
+              Node p=root;
+              
+              while(p!=null && p.data!=x)
+              {
+                  if(x>p.data)
+                  p=p.right;
+                  else
+                  p=p.left;
+              }
+              if(p==null)
+              return false;
+              else
+              return true;
+              
+              
+          }
+          
+void delete(int x){
+    
+    if(root==null){
+    return;
+    }
+    
+    else{
+        Node p=root;
+     Node q=root;
+     
+    while(q!=null && q.data!=x){
+         p=q;
+        if(x>q.data)
+        q=q.right;
+        else
+        q=q.left;
+    }
+    if(q==null)
+    System.out.println("Element not found");
+
+if(q.left==null && q.right==null){
+    
+    if(x<p.data)
+    p.left=null;
+    else
+    p.right=null;
+        
+    
+    
+}
+else if (q.left==null || q.right==null){
+    if(p.left==q)
+    {
+        if(q.left==null)
+        p.left=q.right;
+        else
+        p.left=q.left;
+    }
+    else
+    {
+        if(q.left==null)
+        p.right=q.right;
+        else
+        p.right=q.left;
+    }
+    
+}
+else{
+    p=q;
+    Node back=q.left;
+    while(q.right!=null){
+        back=q;
+        q=q.right;
+    }
+    if(back==q){
+        p.data=q.data;
+        p.left=q.left;
+    }
+    else{
+        p.data=q.data;
+        back.right=null;
+    }
+    
+}
+    
+}
+}
+          
+public static void main(String[] args){
+     Binarysearchtree t=new Binarysearchtree();
+            t.insert(6);
+             t.insert(2);
+            t.insert(3);
+            t.insert(4);
+            t.insert(5);
+            t.insert(7);
+            t.delete(5);
+            t.delete(6);
+            t.levelorder(root);
+            System.out.println(t.search(4));
+            System.out.println(t.search(8));
+}
+
+}
