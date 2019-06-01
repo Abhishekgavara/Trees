@@ -1,0 +1,109 @@
+
+import java.util.Queue;
+import java.util.LinkedList;
+
+
+class Binarytree{
+    static Node root;
+    class Node{
+        int data;
+        Node left,right;
+        public Node(int data){
+            this.data=data;
+            
+        }
+    }
+                     Queue<Node> q=new LinkedList<Node>();
+
+        void insert(int x){
+
+            Node p=new Node(x);
+
+            if(root==null)
+            {
+                root=p;
+                return;
+            }
+            else{
+                q.add(root);
+                
+                while(!q.isEmpty()){
+                    Node temp=q.poll();
+                    
+                    if(temp.left==null){
+                        temp.left=p;
+                        return;
+                        
+                    }
+                    else{
+                        q.add(temp.left);
+                    }
+                    
+                    if(temp.right==null){
+                        temp.right=p;
+                        return;
+                    }
+                    else{
+                        q.add(temp.right);
+                    }
+                }
+            }
+            
+            
+            
+        }
+        void levelorder(Node root)
+        {
+         Queue<Node> q=new LinkedList<Node>();
+
+                if(root==null)
+                return;
+                
+                q.add(root);
+            
+               while(!q.isEmpty()){
+                   Node temp=q.poll();
+                   System.out.println(temp.data);
+                   
+                   if(temp.left!=null)
+                   q.add(temp.left);
+                   
+                   if(temp.right!=null)
+                   q.add(temp.right);
+                       
+                   }
+               }
+               
+               Node Rem(Node root,int sum){
+                   if(root==null)
+                   return null;
+                   
+                   root.left=Rem(root.left,sum-root.data);
+                   root.right=Rem(root.right,sum-root.data);
+                   
+                   
+                   if(root.left==null && root.right==null){
+                       
+                       if(root.data<sum)
+                       
+                           root = null;
+                       
+                   }
+                                          return root;
+
+               }
+            
+        public static void main(String[] args){
+            Binarytree t=new Binarytree();
+            t.insert(1);
+             t.insert(2);
+            t.insert(3);
+            t.insert(3);
+            t.insert(5);
+            t.levelorder(root);
+            t.Rem(root,7);
+            System.out.println("After removal");
+                        t.levelorder(root);
+
+        }
+}
