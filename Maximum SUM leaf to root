@@ -1,0 +1,116 @@
+
+import java.util.Queue;
+import java.util.LinkedList;
+
+
+class Binarytree{
+    static Node root;
+    class Node{
+        int data;
+        Node left,right;
+        public Node(int data){
+            this.data=data;
+            
+        }
+    }
+    static int maxsum;
+                     Queue<Node> q=new LinkedList<Node>();
+
+        void insert(int x){
+
+            Node p=new Node(x);
+
+            if(root==null)
+            {
+                root=p;
+                return;
+            }
+            else{
+                q.add(root);
+                
+                while(!q.isEmpty()){
+                    Node temp=q.poll();
+                    
+                    if(temp.left==null){
+                        temp.left=p;
+                        return;
+                        
+                    }
+                    else{
+                        q.add(temp.left);
+                    }
+                    
+                    if(temp.right==null){
+                        temp.right=p;
+                        return;
+                    }
+                    else{
+                        q.add(temp.right);
+                    }
+                }
+            }
+            
+            
+            
+        }
+        void levelorder(Node root)
+        {
+         Queue<Node> q=new LinkedList<Node>();
+
+                if(root==null)
+                return;
+                
+                q.add(root);
+            
+               while(!q.isEmpty()){
+                   Node temp=q.poll();
+                   System.out.println(temp.data);
+                   
+                   if(temp.left!=null)
+                   q.add(temp.left);
+                   
+                   if(temp.right!=null)
+                   q.add(temp.right);
+                       
+                   }
+               }
+               
+             static  void Rem(Node root,int sum){
+                   if(root==null)
+                   {               
+                  if(sum>maxsum)
+                      maxsum=sum;
+                      
+                      
+                      return;
+                  
+    
+               }
+               Rem(root.left,sum+root.data);
+               Rem(root.right,sum+root.data);
+               }
+               
+               static int ReRem(Node root){
+                   if(root==null)
+                   return 0;
+                   
+                   maxsum=Integer.MIN_VALUE;
+                  
+                  Rem(root,0);
+                  
+                 return maxsum;
+                   
+               }
+            
+        public static void main(String[] args){
+            Binarytree t=new Binarytree();
+            t.insert(10);
+             t.insert(-2);
+            t.insert(7);
+            t.insert(8);
+            t.insert(-4);
+            t.levelorder(root);
+            System.out.println(ReRem(root));
+
+        }
+}
