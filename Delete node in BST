@@ -127,6 +127,7 @@ else if (q.left==null || q.right==null){
 else{
     p=q;
     Node back=q.left;
+    q=back;
     while(q.right!=null){
         back=q;
         q=q.right;
