@@ -1,0 +1,90 @@
+import java.util.*;
+class Binarysearchtree{
+   static  Node root;
+    
+
+class Node{
+    int data;
+    Node left,right;
+    public Node(int data){
+        this.data=data;
+    }
+}
+
+void insert(int x){
+ root =   insertRec(root,x);
+    
+}
+Node insertRec(Node root,int x){
+    if(root==null)
+    {
+        root=new Node(x);
+        return root;
+    }
+    
+    if(x>root.data)
+    root.right=insertRec(root.right,x);
+    
+    else if(x<root.data)
+    root.left=insertRec(root.left,x);
+    
+    
+    return root;
+    
+}
+ void levelorder(Node root){
+                                Queue<Node> q=new LinkedList<Node>();
+
+                if(root==null)
+                return;
+                
+                q.add(root);
+            
+               while(!q.isEmpty()){
+                   Node temp=q.poll();
+                   System.out.println(temp.data);
+                   
+                   if(temp.left!=null)
+                   q.add(temp.left);
+                   
+                   if(temp.right!=null)
+                   q.add(temp.right);
+                       
+                   }
+               }
+
+          boolean search(int x){
+              
+              if(root==null)
+              return false;
+              
+              Node p=root;
+              
+              while(p!=null && p.data!=x)
+              {
+                  if(x>p.data)
+                  p=p.right;
+                  else
+                  p=p.left;
+              }
+              if(p==null)
+              return false;
+              else
+              return true;
+              
+              
+          }
+public static void main(String[] args){
+     Binarysearchtree t=new Binarysearchtree();
+            t.insert(6);
+             t.insert(2);
+            t.insert(3);
+            t.insert(4);
+            t.insert(5);
+            t.insert(7);
+            t.levelorder(root);
+            System.out.println(t.search(4));
+            System.out.println(t.search(8));
+}
+
+}
