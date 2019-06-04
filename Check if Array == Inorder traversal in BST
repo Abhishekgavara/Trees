@@ -40,12 +40,12 @@ class Binarytree{
             Node temp=q.poll();
             s.push(temp.data);
             
-            if(temp.left!=null){
+            if(temp.left!=null)
                 q.add(temp.left);
-            }
-            else if(temp.right!=null){
+            
+             if(temp.right!=null)
                 q.add(temp.right);
-            }
+            
         }
     }
     boolean compare(int a[]){
@@ -66,15 +66,16 @@ class Binarytree{
     }
     public static void main(String[] args){
         Binarytree t=new Binarytree();
-        t.insert(1);
-                t.insert(2);
-        t.insert(3);
-        t.insert(4);
+        t.insert(10);
+                t.insert(6);
         t.insert(5);
-        t.insert(6);
+        t.insert(7);
+        t.insert(13);
         t.Levelorder(root);
-        int a[]={1,2,3,4,5,6};
-        System.out.println(t.compare(a));
+        int a1[]={10,6,13,5,7};
+        System.out.println(t.compare(a1));
+        int a2[]={10,6,5,13,7};
+        System.out.println(t.compare(a2));
 
     }
     
