@@ -10,8 +10,9 @@ class Binarytree{
             this.data=data;
         }
     }
-    static Queue<Node> q=new LinkedList<Node>();
     void insert(int x){
+     Queue<Node> q=new LinkedList<Node>();
+    
         Node p=new Node(x);
                 if(x==0){
             p=null;
