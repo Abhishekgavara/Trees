@@ -1,0 +1,66 @@
+import java.util.*;
+class Binarytree{
+    static Node root;
+    static Stack<Integer> s=new Stack<Integer>();
+    class Node{
+        int data;
+        Node left,right;
+        Node(int data){
+            this.data=data;
+        }
+    }
+    
+    void insert(int x){
+        root=insertRec(root,x);
+    }
+    
+    Node insertRec(Node root,int x)
+    {
+        if(root==null)
+        return (new Node(x));
+        
+        if(x>root.data)
+        root.right=insertRec(root.right,x);
+        
+        else if(x<root.data)
+        root.left=insertRec(root.left,x);
+        
+        return root;
+    }
+    
+    void Inorder(Node root){
+        if(root==null)
+        return;
+        Inorder(root.left);
+        s.push(root.data);
+        Inorder(root.right);
+        
+    }
+    
+    int KthElement(int k){
+        int l=s.size();
+        for(int i=1;i<(l-k+1);i++){
+            s.pop();
+        }
+        return (s.peek());
+    }
+    public static void main(String[] args){
+        
+        Binarytree t =new Binarytree();
+        t.insert(20);
+                t.insert(22);
+        t.insert(8);
+        t.insert(4);
+        t.insert(12);
+                t.insert(10);
+        t.insert(14);
+     
+        t.Inorder(root);
+        System.out.println(s);
+        
+        System.out.println(t.KthElement(5));
+                System.out.println(s);
+
+
+    }
+}
