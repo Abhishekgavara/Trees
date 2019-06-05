@@ -1,0 +1,79 @@
+import java.util.Queue;
+import java.util.LinkedList;
+
+
+class Binarytree{
+    static Node root;
+    class Node{
+        int data;
+        Node left,right;
+        public Node(int data){
+            this.data=data;
+            
+        }
+    }
+                     Queue<Node> q=new LinkedList<Node>();
+
+        void insert(int x){
+
+            Node p=new Node(x);
+
+            if(root==null)
+            {
+                root=p;
+                return;
+            }
+            else{
+                q.add(root);
+                
+                while(!q.isEmpty()){
+                    Node temp=q.poll();
+                    
+                    if(temp.left==null){
+                        temp.left=p;
+                        return;
+                        
+                    }
+                    else{
+                        q.add(temp.left);
+                    }
+                    
+                    if(temp.right==null){
+                        temp.right=p;
+                        return;
+                    }
+                    else{
+                        q.add(temp.right);
+                    }
+                }
+            }
+            
+            
+            
+        }
+        
+        boolean isBst(Node root,Node l,Node r){
+            if(root==null)
+            return true;
+            
+            
+            if(l!=null && root.data<l.data)
+            return false;
+            
+            if(r!=null && root.data>r.data)
+            return false;
+            
+            
+            return(isBst(root.left,l,root)&&isBst(root.right,root,r));
+        }
+        
+          public static void main(String[] args){
+            Binarytree t=new Binarytree();
+            t.insert(4);
+             t.insert(2);
+            t.insert(5);
+            t.insert(1);
+            t.insert(3);
+            System.out.println(t.isBst(root,null,null));
+}
+}
