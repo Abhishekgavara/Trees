@@ -1,0 +1,64 @@
+import java.util.*;
+
+class Binarytree{
+    static Node root;
+    class Node{
+        int data;
+        Node left,right;
+        Node(int data){
+            this.data=data;
+        }
+    }
+    public class count{
+        int c=0;
+    }
+    void insert(int x){
+        root=insertRec(root,x);
+    }
+    
+    Node insertRec(Node root,int x){
+        if(root==null)
+        return(new Node(x));
+        
+        if(x<root.data)
+        root.left=insertRec(root.left,x);
+        
+        if(x>root.data)
+        root.right=insertRec(root.right,x);
+        
+        
+    return root;
+        
+    }
+     void kthLargest(Node root,int k,count C){
+        
+        if(root==null || C.c>=k )
+        return;
+        
+        kthLargest(root.right,k,C);
+        
+        C.c++;
+        
+        if(C.c==k){
+            System.out.println(root.data);
+            
+            return;
+        }
+        
+        kthLargest(root.left,k,C);
+    }
+    void kthL(int k){
+ count c = new count();
+ kthLargest(root,k,c);
+    }
+    
+    public static void main(String[] args){
+        Binarytree t =new Binarytree();
+        t.insert(2);
+        t.insert(3);
+        t.insert(1);
+        for(int i=1;i<4;i++){
+        t.kthL(i);
+    }
+    }
+}
