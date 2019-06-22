@@ -1,0 +1,100 @@
+import java.util.*;
+
+
+class BinaryTree{
+    static Node root;
+    class Node{
+        int data;
+        Node left,right;
+        Node(int data){
+            this.data=data;
+        }
+    }
+    
+    void Boundarytraversal(Node root){
+        System.out.println(root.data);
+        printLeft(root.left);
+        printLeaves(root);
+        printRight(root.right);
+    }
+    
+   void printLeft(Node root){
+        Node p=root;
+        while(p.left!=null){
+            System.out.println(p.data);
+            p=p.left;
+        }
+        if(p.right!=null){
+            System.out.println(p.data);
+            printLeft(p.right);
+            
+        }
+    }
+    void printRight(Node root)
+    {
+         if(root==null)
+        return ;
+        
+        Node p=root;
+        while(p.right!=null){
+
+                        System.out.println(p.data);
+                                                p=p.right;
+
+
+        }
+        if(p.left!=null){
+            printRight(p.left);
+            
+        }
+    }
+    void printLeaves(Node root){
+        if(root==null)
+        return ;
+        
+        Node p=root;
+        if(p.left==null && p.right==null){
+            System.out.println(p.data);
+        }
+        printLeaves(root.left);
+                printLeaves(root.right);
+
+    }
+void insert(int x){
+ root =   insertRec(root,x);
+    
+}
+Node insertRec(Node root,int x){
+    if(root==null)
+    {
+        root=new Node(x);
+        return root;
+    }
+    
+    if(x>root.data)
+    root.right=insertRec(root.right,x);
+    
+    else if(x<root.data)
+    root.left=insertRec(root.left,x);
+    
+    
+    return root;
+    
+}
+
+    public static void main(String[] args){
+     BinaryTree t=new BinaryTree();
+            t.insert(10);
+             t.insert(2);
+            t.insert(1);
+            t.insert(3);
+            t.insert(4);
+            t.insert(15);
+            t.insert(12);
+            t.insert(17);
+            t.insert(16);
+            t.insert(18);
+            t.Boundarytraversal(root);
+                   
+               }
+}
