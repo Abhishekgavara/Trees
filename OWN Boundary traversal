@@ -44,6 +44,8 @@ class BinaryTree{
 
         }
         if(p.left!=null){
+                    System.out.println(p.data);
+
             printRight(p.left);
             
         }
